@@ -13,7 +13,7 @@ export const SingleArticlePage = () => {
     const navigate = useNavigate()
     const userName = useSelector(state => state.user.username)
     
-    const [isAuth, setAuth] = useState(Boolean(window.localStorage.getItem('token')))
+    const [isAuth] = useState(Boolean(window.localStorage.getItem('token')))
     const [article, setArticle] = useState()
     const [isAccess, setAccess] = useState(false)
     const [isLiked, setIsLiked] = useState(0)
@@ -97,7 +97,6 @@ export const SingleArticlePage = () => {
             setIsLiked(data.article.favorited)
         }
     }
-    
     return (
         <>
             { 
