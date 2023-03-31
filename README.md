@@ -1,1 +1,1 @@
-# https://blog-platform-lake.vercel.app/
+https://blog-kata-beta.vercel.app/
