@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { setDataArticles } from "./ArticleSlice";
+import { baseUrl } from "./BaseUrl"
 
 export const getUserAuthorization = createAsyncThunk(
     'user/getUserAuthorization', 
     async (props, {rejectWithValue, dispatch}) => {
        
-    const res = await fetch('https://blog.kata.academy/api/users/login', {
+    const res = await fetch(`${baseUrl}/users/login`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ user: { ...props } }),
@@ -14,12 +16,23 @@ export const getUserAuthorization = createAsyncThunk(
 
     dispatch(setUserAutorization(res))
 })
+export const getArticles = createAsyncThunk('articles/getArticles', async (page, {rejectWithValue, dispatch}) => {
+    const res = await fetch(`${baseUrl}/articles?limit=5&offset=${page}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${window.localStorage.getItem('token')}`,
+        }})
+        .then(res => res.json())
+        .catch((error) => rejectWithValue(error))
 
+    dispatch(setDataArticles(res))
+})
 export const getUserRegistration = createAsyncThunk(
     'user/getUserRegistration', 
     async (props, {rejectWithValue, dispatch}) => {
     
-    const res = await fetch('https://blog.kata.academy/api/users', {
+    const res = await fetch(`${baseUrl}/users`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ user: { ...props } }),
@@ -33,7 +46,7 @@ export const getUserRegistration = createAsyncThunk(
 export const getEditUser = createAsyncThunk(
     'user/getEditUser', 
     async (props, {rejectWithValue, dispatch}) => {
-    const res = await fetch('https://blog.kata.academy/api/user', {
+    const res = await fetch(`${baseUrl}/user`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

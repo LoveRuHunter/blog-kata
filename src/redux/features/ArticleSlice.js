@@ -1,17 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-
-export const getArticles = createAsyncThunk('articles/getArticles', async (page, {rejectWithValue, dispatch}) => {
-    const res = await fetch(`https://blog.kata.academy/api/articles?limit=5&offset=${page}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Token ${window.localStorage.getItem('token')}`,
-        }})
-        .then(res => res.json())
-        .catch((error) => rejectWithValue(error))
-        
-    dispatch(setDataArticles(res))
-})
+import { createSlice } from "@reduxjs/toolkit"
+import { getArticles } from "./AuthUserSlice"
 
 const initialState = {
     data: {},

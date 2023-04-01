@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom"
 import { useNavigate, Link } from "react-router-dom"
 import { LinearProgress} from "@mui/material"
 import { putLike, deleteLike } from "../../components/services/likeService"
+import  { baseUrl } from "../../redux/features/BaseUrl";
+import { onClickRemove } from "../../components/services/articlePageServices"
 
 import './SingleArticlePage.css'
 
@@ -21,7 +23,7 @@ export const SingleArticlePage = () => {
 
     // Получаем статью с сервера 
     useEffect(() => {
-        fetch(`https://blog.kata.academy/api/articles/${id}`, {
+        fetch(`${baseUrl}/articles/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -67,23 +69,6 @@ export const SingleArticlePage = () => {
         return true
     }
 
-    // Удаляем статью
-    const onClickRemove = () => {
-        if (window.confirm('Вы действительно хотите удалить статью?')) {
-            fetch(`https://blog.kata.academy/api/articles/${article.slug}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Token ' + window.localStorage.getItem('token'),
-            },
-        })
-        .then(res => navigate("/"))
-        .catch((error) => {
-            console.warn(error)
-        })
-        }
-    }
-
     // Проставляем и удаляет лайки 
     const giveLike = async () => {
         if (!isAuth) return
@@ -115,7 +100,7 @@ export const SingleArticlePage = () => {
                                 
                             </div>
                             {article.tagList.length > 0 
-                                ? (article.tagList.map((elem, ind) => <span key={ind} className="article-tag">{elem}</span>)) 
+                                ? (article.tagList.map((elem, ind) => <span key={ind} className="article-tag">{elem}</span>))
                                 : null}
                             <p className="article-description">{article.description}</p>
                         </div>

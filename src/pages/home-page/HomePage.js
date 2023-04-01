@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {Box, Pagination, LinearProgress} from "@mui/material"
 
 import { Article } from '../../components/article/Article'
-import { getArticles } from '../../redux/features/ArticleSlice'
+import { getArticles } from '../../redux/features/AuthUserSlice'
 
 import './HomePage.css'
 

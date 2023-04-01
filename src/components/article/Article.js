@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { putLike, deleteLike } from '../services/likeService'
+import { format } from 'date-fns'
+import { getId } from '../../helpers/getId'
 
 import './Article.css'
 
@@ -50,7 +52,7 @@ export const Article = (props) => {
 						<span>{likes}</span>
 					</div>
 					<div className="tags-wrapper">
-						{tagList.map((tag, ind) => <span key={ind} className="tag">{tag}</span>)}
+						{tagList.map((tag) => <span key={getId()} className="tag">{tag}</span>)}
 					</div>
 				</div>
 				<p className="content">{
@@ -61,7 +63,7 @@ export const Article = (props) => {
 			<div className="article-item__left-part">
 				<div className="article-info">
 					<div className="author-name">{author.username}</div>
-					<div className="publication-date">{ date(createdAt) }</div>
+					<div className="publication-date">{format(new Date(createdAt), 'dd MMMM yyyy')}</div>
 				</div>
 					<img className="article-photo" src={author.image} alt="Author" />
 			</div>

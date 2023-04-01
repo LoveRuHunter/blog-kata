@@ -9,6 +9,7 @@
     "@mui/material": "^5.10.5",
     "@mui/styled-engine-sc": "^5.10.3",
     "@reduxjs/toolkit": "^1.6.2",
+    "date-fns": "^2.29.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.35.0",
