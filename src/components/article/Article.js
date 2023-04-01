@@ -54,7 +54,7 @@ export const Article = (props) => {
 					</div>
 				</div>
 				<p className="content">{
-					body.length > 200 ? `${body.slice(0, 200)}...` : body
+					body && (body.length > 200 ? `${body.slice(0, 200)}...` : body)
 				}
 				</p>
 			</div>
